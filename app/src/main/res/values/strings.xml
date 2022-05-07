@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MyCart</string>
+    <string name="title_products">Products</string>
+    <string name="title_cart">Cart</string>
+    <string name="title_orders">Orders</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="new_to_mycart">New to MyCart?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="err_input_username">Please input username</string>
+    <string name="err_input_password">Please input password</string>
+</resources>
