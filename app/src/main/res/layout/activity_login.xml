@@ -2,30 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/default_ui_padding"
-    tools:context=".ui.login.LoginActivity">
+    tools:context=".ui.screens.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.75"
-        android:gravity="center">
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginBottom="30dp"
             android:src="@drawable/img_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@color/default_label_color"
+            android:textSize="25sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingStart="@dimen/default_ui_padding"
+        android:paddingEnd="@dimen/default_ui_padding">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -40,6 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
+                android:maxLines="1"
+                android:imeOptions="actionNext"
                 android:textSize="@dimen/default_text_size" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,6 +72,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
                 android:textSize="@dimen/default_text_size" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,25 +100,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.25"
+        android:layout_weight="1.7"
         android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            android:layout_weight="1"
             android:gravity="end"
             android:text="@string/new_to_mycart"
             android:textColor="@color/default_label_color"
             android:textSize="@dimen/default_text_size" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_weight="1"
             android:text="@string/sign_up"
             android:textColor="@color/default_label_color"
             android:textSize="@dimen/default_text_size"

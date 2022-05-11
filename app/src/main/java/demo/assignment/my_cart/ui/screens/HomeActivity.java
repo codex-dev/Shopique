@@ -1,28 +1,25 @@
-package demo.assignment.my_cart.ui;
+package demo.assignment.my_cart.ui.screens;
 
 import android.os.Bundle;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import demo.assignment.my_cart.R;
-import demo.assignment.my_cart.databinding.ActivityMainBinding;
+import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 
-public class MainActivity extends AppCompatActivity {
-
-    private ActivityMainBinding binding;
+public class HomeActivity extends CommonActivity implements AppbarListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        appBarClickListener = this;
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -32,9 +29,23 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        NavigationUI.setupWithNavController(navView, navController);
     }
 
+    @Override
+    public void onLeftIconClicked() {
 
+    }
 
+    @Override
+    public void onRightIconClicked() {
+//        Toast.makeText(this, "Logout Clicked", Toast.LENGTH_SHORT).show();
+        signOutUser();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        exitApp();
+    }
 }
