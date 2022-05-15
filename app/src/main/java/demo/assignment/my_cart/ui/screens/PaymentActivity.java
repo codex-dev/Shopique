@@ -25,6 +25,7 @@ public class PaymentActivity extends CommonActivity implements AppbarListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
         setupActionbar(getString(R.string.payment_method), true, false);
+        dismissKeyboard(findViewById(R.id.payment_activity), PaymentActivity.this);
 
         appBarClickListener = this;
 

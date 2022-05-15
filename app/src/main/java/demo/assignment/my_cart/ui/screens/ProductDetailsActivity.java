@@ -12,9 +12,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.text.MessageFormat;
+import java.util.HashMap;
 
 import demo.assignment.my_cart.R;
+import demo.assignment.my_cart.models.CartItem;
 import demo.assignment.my_cart.models.Product;
+import demo.assignment.my_cart.storage.SharedPrefListener;
 import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 
 public class ProductDetailsActivity extends CommonActivity implements AppbarListener {
@@ -24,6 +27,7 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
     private Button btnPlus, btnMinus, btnAddToCart;
 
     private int quantity = 0;
+    private Product product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +56,7 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
     }
 
     private void setValues() {
-        Product product = getIntent().getParcelableExtra("product");
+        product = getIntent().getParcelableExtra("product");
 
         if (!isNullOrEmpty(product.getImage())) {
             Glide.with(this).load(product.getImage()).into(ivProduct);
@@ -95,10 +99,23 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
             @Override
             public void onClick(View view) {
                 if (quantity > 0) {
-//                    if(item is already added to cart){
-//                      update qty
-//                    }
-                    // TODO add item to sharedPref with qty
+                    HashMap<Integer, CartItem> hmCartItems = getCartItems();
+                    boolean hasProduct = hmCartItems.containsKey(product.getId());
+                    hmCartItems.put(product.getId(), new CartItem(product.getTitle(), product.getImage(), product.getPrice(), quantity));
+
+                    updateCartItems(hmCartItems, new SharedPrefListener() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(ProductDetailsActivity.this,
+                                    hasProduct ? "Product quantity has been updated in the cart" : "Product has been added to the cart.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
                 } else {
                     Toast.makeText(ProductDetailsActivity.this, "Quantity cannot be 0", Toast.LENGTH_SHORT).show();
                 }

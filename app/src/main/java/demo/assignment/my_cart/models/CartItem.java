@@ -6,6 +6,13 @@ public class CartItem {
     private double unitPrice;
     private int orderedQty;
 
+    public CartItem(String productName, String imageUrl, double unitPrice, int orderedQty) {
+        this.productName = productName;
+        this.imageUrl = imageUrl;
+        this.unitPrice = unitPrice;
+        this.orderedQty = orderedQty;
+    }
+
     public String getProductName() {
         return productName;
     }

@@ -23,8 +23,8 @@ import java.util.ArrayList;
 
 import demo.assignment.my_cart.R;
 import demo.assignment.my_cart.models.Product;
-import demo.assignment.my_cart.services.NetworkListener;
-import demo.assignment.my_cart.services.NetworkService;
+import demo.assignment.my_cart.network.NetworkListener;
+import demo.assignment.my_cart.network.NetworkService;
 import demo.assignment.my_cart.ui.adapters.ProductGridAdapter;
 import demo.assignment.my_cart.ui.screens.HomeActivity;
 import demo.assignment.my_cart.ui.util.TextFormatter;

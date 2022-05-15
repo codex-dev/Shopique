@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/payment_activity"
     android:padding="@dimen/default_ui_padding"
     tools:context=".ui.screens.PaymentActivity">
 

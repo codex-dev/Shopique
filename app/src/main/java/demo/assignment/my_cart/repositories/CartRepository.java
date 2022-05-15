@@ -8,7 +8,7 @@ import demo.assignment.my_cart.models.Product;
 
 public class CartRepository {
     private static CartRepository instance;
-    private ArrayList<CartItem> listCartItems;
+    private final ArrayList<CartItem> listCartItems;
 
     private CartRepository() {
         listCartItems = new ArrayList<>();
@@ -23,11 +23,11 @@ public class CartRepository {
 
     //TODO: retrieve products, categories and filtered products from api
 
-    public List<Product> getAllProducts(String response){
+    public List<Product> getAllProducts(String response) {
         return new ArrayList<Product>();
     }
 
-    public List<String> getProductCategories(String response){
+    public List<String> getProductCategories(String response) {
         return new ArrayList<>();
     }
 //

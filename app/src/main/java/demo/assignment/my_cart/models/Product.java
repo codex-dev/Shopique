@@ -4,25 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Product implements Parcelable {
-    private int id;
-    private String title;
-    private double price;
-    private String description;
-    private String category;
-    private String image;
-    private Rating rating;
-
-    protected Product(Parcel in) {
-        id = in.readInt();
-        title = in.readString();
-        price = in.readDouble();
-        description = in.readString();
-        category = in.readString();
-        image = in.readString();
-        rating = in.readParcelable(Rating.class.getClassLoader());
-    }
-
-
     public static final Creator<Product> CREATOR = new Creator<Product>() {
         @Override
         public Product createFromParcel(Parcel in) {
@@ -34,6 +15,24 @@ public class Product implements Parcelable {
             return new Product[size];
         }
     };
+    private int id;
+    private String title;
+    private double price;
+    private String description;
+    private String category;
+    private String image;
+    private Rating rating;
+
+
+    protected Product(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        price = in.readDouble();
+        description = in.readString();
+        category = in.readString();
+        image = in.readString();
+        rating = in.readParcelable(Rating.class.getClassLoader());
+    }
 
     public int getId() {
         return id;

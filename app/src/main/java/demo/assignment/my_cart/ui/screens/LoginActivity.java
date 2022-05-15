@@ -4,7 +4,6 @@ import static demo.assignment.my_cart.ui.util.TextFormatter.getTrimmedText;
 import static demo.assignment.my_cart.ui.util.TextFormatter.isNullOrEmpty;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 

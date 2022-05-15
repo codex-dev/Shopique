@@ -4,14 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Rating implements Parcelable {
-    private double rate;
-    private int count;
-
-    protected Rating(Parcel in) {
-        rate = in.readDouble();
-        count = in.readInt();
-    }
-
     public static final Creator<Rating> CREATOR = new Creator<Rating>() {
         @Override
         public Rating createFromParcel(Parcel in) {
@@ -23,6 +15,13 @@ public class Rating implements Parcelable {
             return new Rating[size];
         }
     };
+    private double rate;
+    private int count;
+
+    protected Rating(Parcel in) {
+        rate = in.readDouble();
+        count = in.readInt();
+    }
 
     public double getRate() {
         return rate;

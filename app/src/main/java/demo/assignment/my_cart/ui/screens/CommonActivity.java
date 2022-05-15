@@ -1,7 +1,12 @@
 package demo.assignment.my_cart.ui.screens;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -11,19 +16,32 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import demo.assignment.my_cart.R;
+import demo.assignment.my_cart.models.CartItem;
+import demo.assignment.my_cart.services.ConnectionStatusService;
 import demo.assignment.my_cart.storage.SharedPref;
+import demo.assignment.my_cart.storage.SharedPrefListener;
 import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 
 public class CommonActivity extends AppCompatActivity {
 
+    public static final String broadcastStringForAction = "checkInternet";
+    public BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            showConnectionStatus(intent.getAction().equals(broadcastStringForAction));
+        }
+    };
     protected AppbarListener appBarClickListener;
+    private IntentFilter intentFilter;
     private SharedPref sharedPref;
 
     @Override
@@ -31,8 +49,50 @@ public class CommonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         sharedPref = new SharedPref(this);
+
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(broadcastStringForAction);
+        Intent serviceIntent = new Intent(this, ConnectionStatusService.class);
+        startService(serviceIntent);
+
+        showConnectionStatus(isOnline(getApplicationContext()));
     }
 
+    private void showConnectionStatus(boolean isConnected) {
+        if (isConnected) {
+//            Toast.makeText(this, "You're online", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "You're offline. Please connect to internet.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(broadcastReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    // background services
+    public boolean isOnline(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+
+        return ni != null && ni.isConnectedOrConnecting();
+    }
+
+    // ui utility
     public void dismissKeyboard(View view, Activity activity) {
         // Set up touch listener for non-text box views to hide keyboard.
         if (!(view instanceof EditText)) {
@@ -54,11 +114,9 @@ public class CommonActivity extends AppCompatActivity {
     }
 
     protected void hideSoftKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity
-                .getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         if (inputMethodManager.isAcceptingText()) {
-            inputMethodManager
-                    .hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         }
     }
 
@@ -81,20 +139,49 @@ public class CommonActivity extends AppCompatActivity {
         ivRight.setOnClickListener(view -> appBarClickListener.onRightIconClicked());
     }
 
+    // shared preference
     protected void signInUser() {
-        sharedPref.setLoggedIn(true);
-        proceedToHome();
+        sharedPref.setLoggedIn(true, new SharedPrefListener() {
+            @Override
+            public void onSuccess() {
+                proceedToHome();
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+
     }
 
     protected void signOutUser() {
-        sharedPref.setLoggedIn(false);
-        gotoLogin();
+        sharedPref.setLoggedIn(false, new SharedPrefListener() {
+            @Override
+            public void onSuccess() {
+                gotoLogin();
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 
     protected boolean isUserSignedIn() {
         return sharedPref.isLoggedIn();
     }
 
+    protected HashMap<Integer, CartItem> getCartItems() {
+        return sharedPref.getCartDetails();
+    }
+
+    protected void updateCartItems(HashMap<Integer, CartItem> hashMap, SharedPrefListener listener) {
+        sharedPref.setCartDetails(hashMap, listener);
+    }
+
+    // ui navigation
     protected void proceedToHome() {
         Intent i = new Intent(this, HomeActivity.class);
         startActivity(i);

@@ -6,7 +6,7 @@ import demo.assignment.my_cart.models.Product;
 
 public class ProductRepository {
     private static ProductRepository instance;
-    private ArrayList<Product> listCartItems;
+    private final ArrayList<Product> listCartItems;
 
     private ProductRepository() {
         listCartItems = new ArrayList<>();

@@ -93,7 +93,7 @@
                 android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="25dp"
                 android:textColor="@color/default_label_color"
                 android:textSize="17sp"
                 tools:text="[description]" />
@@ -102,13 +102,12 @@
                 android:id="@+id/lytButtons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
                     android:layout_marginBottom="15dp"
                     android:text="@string/order_qty"
                     android:textColor="@color/default_label_color"
@@ -122,11 +121,11 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/btnPlus"
+                        android:id="@+id/btnMinus"
                         android:layout_width="40dp"
                         android:layout_height="50dp"
                         android:padding="0dp"
-                        android:text="+"
+                        android:text="-"
                         android:textSize="25sp" />
 
                     <TextView
@@ -142,12 +141,13 @@
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/btnMinus"
+                        android:id="@+id/btnPlus"
                         android:layout_width="40dp"
                         android:layout_height="50dp"
                         android:padding="0dp"
-                        android:text="-"
+                        android:text="+"
                         android:textSize="25sp" />
+
                 </LinearLayout>
 
                 <Button
