@@ -59,7 +59,10 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
         product = getIntent().getParcelableExtra("product");
 
         if (!isNullOrEmpty(product.getImage())) {
-            Glide.with(this).load(product.getImage()).into(ivProduct);
+            Glide.with(this)
+                    .load(product.getImage())
+                    .error(R.drawable.img_placeholder)
+                    .into(ivProduct);
         }
 
         tvTitle.setText(product.getTitle());
@@ -101,14 +104,21 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
                 if (quantity > 0) {
                     HashMap<Integer, CartItem> hmCartItems = getCartItems();
                     boolean hasProduct = hmCartItems.containsKey(product.getId());
-                    hmCartItems.put(product.getId(), new CartItem(product.getTitle(), product.getImage(), product.getPrice(), quantity));
+
+                    if (hasProduct) {
+                        hmCartItems.get(product.getId()).setQty(quantity);
+                    } else {
+                        hmCartItems.put(product.getId(), new CartItem(product.getId(),
+                                product.getTitle(), product.getImage(), product.getPrice(), quantity));
+                    }
 
                     updateCartItems(hmCartItems, new SharedPrefListener() {
                         @Override
                         public void onSuccess() {
                             Toast.makeText(ProductDetailsActivity.this,
-                                    hasProduct ? "Product quantity has been updated in the cart" : "Product has been added to the cart.",
+                                    hasProduct ? getString(R.string.product_qty_updated) : getString(R.string.product_added_to_cart),
                                     Toast.LENGTH_SHORT).show();
+//                            TODO gotoCart();
                         }
 
                         @Override
@@ -117,7 +127,7 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
                         }
                     });
                 } else {
-                    Toast.makeText(ProductDetailsActivity.this, "Quantity cannot be 0", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductDetailsActivity.this, getString(R.string.err_quantity_cant_be_zero), Toast.LENGTH_SHORT).show();
                 }
             }
         });

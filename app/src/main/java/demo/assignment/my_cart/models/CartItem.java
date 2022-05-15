@@ -1,32 +1,22 @@
 package demo.assignment.my_cart.models;
 
-public class CartItem {
-    private String productName;
-    private String imageUrl;
+public class CartItem extends Item {
+
+    private int prodId;
     private double unitPrice;
-    private int orderedQty;
 
-    public CartItem(String productName, String imageUrl, double unitPrice, int orderedQty) {
-        this.productName = productName;
-        this.imageUrl = imageUrl;
+    public CartItem(int prodId, String productName, String imageUrl, double unitPrice, int qty) {
+        super(productName, imageUrl, qty);
+        this.prodId = prodId;
         this.unitPrice = unitPrice;
-        this.orderedQty = orderedQty;
     }
 
-    public String getProductName() {
-        return productName;
+    public int getProdId() {
+        return prodId;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setProdId(int prodId) {
+        this.prodId = prodId;
     }
 
     public double getUnitPrice() {
@@ -37,11 +27,4 @@ public class CartItem {
         this.unitPrice = unitPrice;
     }
 
-    public int getOrderedQty() {
-        return orderedQty;
-    }
-
-    public void setOrderedQty(int orderedQty) {
-        this.orderedQty = orderedQty;
-    }
 }

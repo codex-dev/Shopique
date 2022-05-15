@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="1.1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -51,9 +51,9 @@
                 android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:imeOptions="actionNext"
                 android:inputType="text"
                 android:maxLines="1"
-                android:imeOptions="actionNext"
                 android:textSize="@dimen/default_text_size" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,9 +71,9 @@
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:imeOptions="actionDone"
                 android:textSize="@dimen/default_text_size" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,7 +100,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.7"
+        android:layout_weight="1.8"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:gravity="end"
-            android:text="@string/new_to_mycart"
+            android:text="@string/new_to_my_cart"
             android:textColor="@color/default_label_color"
             android:textSize="@dimen/default_text_size" />
 

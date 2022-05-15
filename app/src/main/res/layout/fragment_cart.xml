@@ -7,11 +7,56 @@
     android:padding="@dimen/default_ui_padding"
     tools:context=".ui.screens.fragments.CartFragment">
 
-    <Button
-        android:id="@+id/btnCheckout"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/checkout"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/cart_is_empty"
+        android:textColor="@color/default_grey"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCartItems"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lytBottom"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_cart" />
+
+    <LinearLayout
+        android:id="@+id/lytBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tvTotalAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Total Amount : $200.60" />
+
+        <Button
+            android:id="@+id/btnCheckout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/checkout" />
+    </LinearLayout>
 </RelativeLayout>

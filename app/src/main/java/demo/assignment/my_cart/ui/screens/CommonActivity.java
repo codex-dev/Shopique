@@ -60,9 +60,9 @@ public class CommonActivity extends AppCompatActivity {
 
     private void showConnectionStatus(boolean isConnected) {
         if (isConnected) {
-//            Toast.makeText(this, "You're online", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, getString(R.string.you_are_online), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "You're offline. Please connect to internet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.you_are_offline), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -89,7 +89,8 @@ public class CommonActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
 
-        return ni != null && ni.isConnectedOrConnecting();
+//        return ni != null && ni.isConnectedOrConnecting();
+        return ni != null && ni.isConnected();
     }
 
     // ui utility
@@ -173,11 +174,11 @@ public class CommonActivity extends AppCompatActivity {
         return sharedPref.isLoggedIn();
     }
 
-    protected HashMap<Integer, CartItem> getCartItems() {
+    public HashMap<Integer, CartItem> getCartItems() {
         return sharedPref.getCartDetails();
     }
 
-    protected void updateCartItems(HashMap<Integer, CartItem> hashMap, SharedPrefListener listener) {
+    public void updateCartItems(HashMap<Integer, CartItem> hashMap, SharedPrefListener listener) {
         sharedPref.setCartDetails(hashMap, listener);
     }
 

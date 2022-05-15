@@ -32,7 +32,7 @@ public class SharedPref {
         return status.equals("Y");
     }
 
-    public void setLoggedIn(boolean isLoggedIn,SharedPrefListener listener) {
+    public void setLoggedIn(boolean isLoggedIn, SharedPrefListener listener) {
         sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
@@ -72,7 +72,7 @@ public class SharedPref {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
                 listener.onSuccess();
-//                sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+                sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
             }
         });
 

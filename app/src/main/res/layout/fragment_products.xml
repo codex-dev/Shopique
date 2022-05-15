@@ -27,12 +27,45 @@
         android:visibility="visible"
         tools:listitem="@layout/item_product" />
 
+    <LinearLayout
+        android:id="@+id/lytNoConnection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/cgCategories"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_error"
+            app:tint="@color/default_grey" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/you_have_lost_connection"
+            android:textColor="@color/default_grey"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnRetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/retry" />
+
+    </LinearLayout>
+
     <ProgressBar
         android:id="@+id/progress_circular"
         android:layout_width="wrap_content"
-        android:visibility="gone"
-        android:progressTint="@color/purple_500"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:progressTint="@color/purple_500"
+        android:visibility="gone" />
 
 </RelativeLayout>

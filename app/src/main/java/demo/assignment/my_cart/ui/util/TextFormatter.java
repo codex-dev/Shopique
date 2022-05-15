@@ -1,6 +1,7 @@
 package demo.assignment.my_cart.ui.util;
 
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class TextFormatter {
 
@@ -12,6 +13,10 @@ public class TextFormatter {
     // check if the given string value is null or empty
     public static boolean isNullOrEmpty(String text) {
         return text == null || text.trim().isEmpty();
+    }
+
+    public static String getTrimmedText(TextView tv) {
+        return tv.getText().toString().trim();
     }
 
     // get the trimmed string value of a given edit text field

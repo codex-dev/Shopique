@@ -54,7 +54,7 @@ public class ProductGridAdapter extends ArrayAdapter<Product> {
         if (!isNullOrEmpty(product.getImage())) {
             Glide.with(context)
                     .load(product.getImage())
-//                    .error(R.drawable.img_placeholder)
+                    .error(R.drawable.img_placeholder)
                     .into(ivProduct);
         }
         tvTitle.setText(product.getTitle());

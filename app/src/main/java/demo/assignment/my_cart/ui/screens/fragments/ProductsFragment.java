@@ -1,15 +1,18 @@
 package demo.assignment.my_cart.ui.screens.fragments;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.chip.Chip;
@@ -39,6 +42,8 @@ public class ProductsFragment extends Fragment {
     private ChipGroup cgCategories;
     private GridView gvProducts;
     private ProgressBar progressBar;
+    private LinearLayout lytNoConnection;
+    private Button btnRetry;
 
     private Gson gson;
     private NetworkService networkService;
@@ -68,16 +73,41 @@ public class ProductsFragment extends Fragment {
         cgCategories = v.findViewById(R.id.cgCategories);
         gvProducts = v.findViewById(R.id.gvProducts);
         progressBar = v.findViewById(R.id.progress_circular);
+        lytNoConnection = v.findViewById(R.id.lytNoConnection);
+        btnRetry = v.findViewById(R.id.btnRetry);
     }
 
     private void setEventListeners() {
         cgCategories.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(ChipGroup group, int checkedId) {
-                Chip checkedChip = group.findViewById(checkedId);
-                String selectedCategory = checkedChip.getText().toString();
+                String selectedCategory = null;
 
-                loadProductsByCategory(selectedCategory.toLowerCase());
+                for (int i = 1; i <= group.getChildCount(); i++) {
+                    Chip chip = group.findViewById(i);
+
+                    if (checkedId == chip.getId()) {
+                        selectedCategory = chip.getText().toString();
+
+                        chip.setTextColor(getResources().getColor(R.color.white));
+                        chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(homeActivity, R.color.purple_500)));
+                    } else {
+                        chip.setTextColor(getResources().getColor(R.color.black));
+                        chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(homeActivity, R.color.light_grey)));
+                    }
+                }
+
+                if (selectedCategory != null)
+                    loadProductsByCategory(selectedCategory.toLowerCase());
+            }
+        });
+
+        btnRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadProductCategories();
+                loadProducts();
+                lytNoConnection.setVisibility(View.GONE);
             }
         });
     }
@@ -105,6 +135,7 @@ public class ProductsFragment extends Fragment {
                                 chip.setId(i + 1);
                                 chip.setText(TextFormatter.capitalizeFirstLetter(category));
                                 chip.setCheckable(true);
+                                chip.setCheckedIconVisible(false);
 
                                 cgCategories.addView(chip);
                             }
@@ -122,7 +153,8 @@ public class ProductsFragment extends Fragment {
                     @Override
                     public void run() {
                         showProgressbar(false);
-                        Toast.makeText(homeActivity, getString(R.string.err_loading_product_categories), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(homeActivity, getString(R.string.err_loading_product_categories), Toast.LENGTH_SHORT).show();
+                        lytNoConnection.setVisibility(View.VISIBLE);
                     }
                 });
             }
@@ -165,7 +197,8 @@ public class ProductsFragment extends Fragment {
                     @Override
                     public void run() {
                         showProgressbar(false);
-                        Toast.makeText(homeActivity, getString(R.string.err_loading_products), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(homeActivity, getString(R.string.err_loading_products), Toast.LENGTH_SHORT).show();
+                        lytNoConnection.setVisibility(View.VISIBLE);
                     }
                 });
             }
@@ -206,7 +239,8 @@ public class ProductsFragment extends Fragment {
                     @Override
                     public void run() {
                         showProgressbar(false);
-                        Toast.makeText(homeActivity, getString(R.string.err_loading_products), Toast.LENGTH_SHORT).show();
+                        lytNoConnection.setVisibility(View.VISIBLE);
+//                        Toast.makeText(homeActivity, getString(R.string.err_loading_products), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

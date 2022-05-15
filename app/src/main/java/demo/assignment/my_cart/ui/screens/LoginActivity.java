@@ -56,7 +56,7 @@ public class LoginActivity extends CommonActivity {
             etPassword.setError(getString(R.string.err_input_password));
             return false;
         }
-        if (!getTrimmedText(etUsername).equals("admin") || !getTrimmedText(etPassword).equals("1234")) {
+        if (!getTrimmedText(etUsername).equals("user") || !getTrimmedText(etPassword).equals("1234")) {
             Toast.makeText(this, getString(R.string.err_invalid_login_credentials), Toast.LENGTH_SHORT).show();
             return false;
         }

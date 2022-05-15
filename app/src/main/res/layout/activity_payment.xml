@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/payment_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/payment_activity"
     android:padding="@dimen/default_ui_padding"
     tools:context=".ui.screens.PaymentActivity">
 
@@ -29,6 +29,7 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rbVisa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -36,21 +37,24 @@
                 android:drawableEnd="@drawable/ic_visa" />
 
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_mastercard" />
-
-            <RadioButton
+                android:id="@+id/rbMastercard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:drawableEnd="@drawable/ic_amex" />
+                android:drawableEnd="@drawable/ic_mastercard" />
 
             <RadioButton
+                android:id="@+id/rbAmex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_paypal" />
+                android:layout_marginStart="5dp"
+                android:drawableEnd="@drawable/ic_amex" />
+
+            <!--            <RadioButton-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:drawableEnd="@drawable/ic_paypal" />-->
 
         </RadioGroup>
 

@@ -21,7 +21,23 @@ public class ConnectionStatusService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         throw new UnsupportedOperationException();
-    }    private final Runnable periodicUpdate = new Runnable() {
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        handler.post(periodicUpdate);
+        return START_STICKY;
+    }
+
+    private boolean isOnline(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+
+//        return ni != null && ni.isConnectedOrConnecting();
+        return ni != null && ni.isConnected();
+    }
+
+    private final Runnable periodicUpdate = new Runnable() {
         @Override
         public void run() {
             handler.postDelayed(periodicUpdate, 1000 - SystemClock.elapsedRealtime() % 1000);
@@ -31,19 +47,6 @@ public class ConnectionStatusService extends Service {
             sendBroadcast(broadcastIntent);
         }
     };
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        handler.post(periodicUpdate);
-        return START_STICKY;
-    }
-
-    public boolean isOnline(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-
-        return ni != null && ni.isConnectedOrConnecting();
-    }
 
 
 }

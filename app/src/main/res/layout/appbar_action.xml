@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:src="@drawable/ic_back"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -28,7 +28,7 @@
         android:layout_width="20dp"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
-        android:visibility="gone"
+        android:src="@drawable/ic_sign_out"
         android:tooltipText="@string/sign_out"
-        android:src="@drawable/ic_sign_out" />
+        android:visibility="gone" />
 </RelativeLayout>

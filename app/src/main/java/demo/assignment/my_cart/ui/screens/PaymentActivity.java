@@ -2,8 +2,10 @@ package demo.assignment.my_cart.ui.screens;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -19,6 +21,7 @@ public class PaymentActivity extends CommonActivity implements AppbarListener {
 
     private TextInputEditText etCHName, etCardNo, etExpDate, etCVC;
     private Button btnPay;
+    private String totalPayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,9 @@ public class PaymentActivity extends CommonActivity implements AppbarListener {
         etExpDate = findViewById(R.id.etExpDate);
         etCVC = findViewById(R.id.etCVC);
         btnPay = findViewById(R.id.btnPay);
+
+        totalPayment = getIntent().getStringExtra("total_amount");
+        btnPay.setText(MessageFormat.format("{0} (${1})", getString(R.string.pay), totalPayment));
     }
 
     private void setEventListeners() {
@@ -53,6 +59,38 @@ public class PaymentActivity extends CommonActivity implements AppbarListener {
                 showDatePicker();
             }
         });
+
+        btnPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (hasValidInput()) {
+                    //TODO show success ui & redirect to order list ui
+                }
+            }
+        });
+    }
+
+    private boolean hasValidInput() {
+        if (TextFormatter.isNullOrEmpty(etCHName)) {
+            etCHName.requestFocus();
+            etCHName.setError(getString(R.string.err_input_card_holder_name));
+            return false;
+        }
+        if (TextFormatter.isNullOrEmpty(etCardNo)) {
+            etCardNo.requestFocus();
+            etCardNo.setError(getString(R.string.err_input_card_number));
+            return false;
+        }
+        if (TextFormatter.isNullOrEmpty(etExpDate)) {
+            Toast.makeText(this, getString(R.string.err_set_exp_date), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextFormatter.isNullOrEmpty(etCVC)) {
+            etCVC.requestFocus();
+            etCVC.setError(getString(R.string.err_input_cvc));
+            return false;
+        }
+        return true;
     }
 
     private void showDatePicker() {
