@@ -21,6 +21,7 @@ import java.util.List;
 import demo.assignment.my_cart.R;
 import demo.assignment.my_cart.models.CartItem;
 import demo.assignment.my_cart.ui.adapters.CartItemAdapter;
+import demo.assignment.my_cart.ui.screens.DeliveryLocationActivity;
 import demo.assignment.my_cart.ui.screens.HomeActivity;
 import demo.assignment.my_cart.ui.screens.PaymentActivity;
 import demo.assignment.my_cart.ui.screens.listeners.CartUpdateListener;
@@ -62,7 +63,7 @@ public class CartFragment extends Fragment {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(homeActivity, PaymentActivity.class);
+                Intent i = new Intent(homeActivity, DeliveryLocationActivity.class);
                 i.putExtra("total_amount", totalPayableAmount);
                 startActivity(i);
             }

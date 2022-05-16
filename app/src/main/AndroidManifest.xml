@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyCart">
         <activity
+            android:name=".ui.screens.DeliveryLocationActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:exported="false" />
+        <activity
             android:name=".ui.screens.ProductDetailsActivity"
             android:exported="false" />
         <activity

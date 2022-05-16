@@ -11,4 +11,5 @@ public class Order {
     private String placedDateTime;
     private List<OrderItem> orderItems;
     private OrderStatus orderStatus;
+    private String deliveryLocation;
 }

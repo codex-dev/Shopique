@@ -42,4 +42,13 @@
     <string name="err_input_cvc">Please input CVC</string>
     <string name="total_amount">Total Amount : </string>
     <string name="cart_is_empty">Cart is empty</string>
+    <string name="delivery_location">Delivery Location</string>
+    <string name="select_delivery_location">Select Delivery Location</string>
+    <string name="search_location">Search Location</string>
+    <string name="next">Next</string>
+    <string name="pick_on_map">Pick on map</string>
+    <string name="use_current_location">Use my current location</string>
+    <string name="favourites">Favourites</string>
+    <string name="home">Home</string>
+    <string name="work">Work</string>
 </resources>

@@ -65,6 +65,7 @@ public class PaymentActivity extends CommonActivity implements AppbarListener {
             public void onClick(View view) {
                 if (hasValidInput()) {
                     //TODO show success ui & redirect to order list ui
+                    Toast.makeText(PaymentActivity.this, "Order has been placed successfully", Toast.LENGTH_SHORT).show();
                 }
             }
         });
