@@ -14,6 +14,7 @@ import okhttp3.Response;
 public class NetworkService {
     private static NetworkService networkService;
     private final OkHttpClient okHttpClient;
+    private final String baseUrl = "https://fakestoreapi.com";
 
     private NetworkService() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -32,19 +33,19 @@ public class NetworkService {
     }
 
     public void getAllProducts(NetworkListener listener) {
-        String url = "https://fakestoreapi.com/products";
+        String url = baseUrl + "/products";
 
         initiateRequest(url, listener);
     }
 
     public void getProductCategories(NetworkListener listener) {
-        String url = "https://fakestoreapi.com/products/categories";
+        String url = baseUrl + "/products/categories";
 
         initiateRequest(url, listener);
     }
 
     public void getProductsByCategory(String category, NetworkListener listener) {
-        String url = "https://fakestoreapi.com/products/category/" + category;
+        String url = baseUrl + "/products/category/" + category;
 
         initiateRequest(url, listener);
     }

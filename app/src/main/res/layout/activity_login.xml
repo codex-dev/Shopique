@@ -82,7 +82,7 @@
             android:layout_marginTop="15dp"
             android:gravity="end"
             android:text="@string/forgot_password"
-            android:textColor="@color/default_label_color"
+            android:textColor="@color/blue_default"
             android:textSize="@dimen/default_text_size"
             android:textStyle="bold" />
 
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="@string/sign_up"
-            android:textColor="@color/default_label_color"
+            android:textColor="@color/blue_default"
             android:textSize="@dimen/default_text_size"
             android:textStyle="bold" />
     </LinearLayout>

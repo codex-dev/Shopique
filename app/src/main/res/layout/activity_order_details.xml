@@ -200,6 +200,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="@string/scan_qr" />
+        android:text="@string/scan_qr_code" />
 
 </RelativeLayout>

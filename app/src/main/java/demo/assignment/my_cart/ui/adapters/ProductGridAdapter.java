@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.bumptech.glide.Glide;
 
@@ -38,7 +37,6 @@ public class ProductGridAdapter extends ArrayAdapter<Product> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//        return super.getView(position, convertView, parent);
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(resource, parent, false);
@@ -49,7 +47,6 @@ public class ProductGridAdapter extends ArrayAdapter<Product> {
         TextView tvTitle = listItemView.findViewById(R.id.tvTitle);
         TextView tvPrice = listItemView.findViewById(R.id.tvPrice);
         TextView tvRating = listItemView.findViewById(R.id.tvRating);
-        AppCompatImageButton btnAddToCart = listItemView.findViewById(R.id.btnAddToCart);
 
         if (!isNullOrEmpty(product.getImage())) {
             Glide.with(context)
@@ -60,13 +57,6 @@ public class ProductGridAdapter extends ArrayAdapter<Product> {
         tvTitle.setText(product.getTitle());
         tvPrice.setText(MessageFormat.format("${0}", product.getPrice()));
         tvRating.setText(String.valueOf(product.getRating().getRate()));
-        btnAddToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO save item to shared pref cart list
-                // TODO increase cart item count
-            }
-        });
 
         listItemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -22,6 +22,7 @@ import demo.assignment.my_cart.models.CartItem;
 import demo.assignment.my_cart.models.Order;
 import demo.assignment.my_cart.models.OrderItem;
 import demo.assignment.my_cart.storage.SharedPrefListener;
+import demo.assignment.my_cart.ui.Constants;
 import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 import demo.assignment.my_cart.ui.util.DateFormatter;
 import demo.assignment.my_cart.ui.util.TextFormatter;
@@ -89,7 +90,7 @@ public class PaymentActivity extends CommonActivity implements AppbarListener {
                         Order newOrder = new Order(
                                 DateFormatter.getCurrentDateTimeLocal(),
                                 orderItemList,
-                                "PENDING",
+                                Constants.PENDING,
                                 deliveryLocation,
                                 totalPayment
                         );
@@ -114,7 +115,7 @@ public class PaymentActivity extends CommonActivity implements AppbarListener {
                                 resetCart(new SharedPrefListener() {
                                     @Override
                                     public void onSuccess() {
-                                        Toast.makeText(PaymentActivity.this, "Order has been placed successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PaymentActivity.this, getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT).show();
 //                                  TODO gotoOrders();
                                     }
 
@@ -131,7 +132,7 @@ public class PaymentActivity extends CommonActivity implements AppbarListener {
                             }
                         });
                     } else {
-                        Toast.makeText(PaymentActivity.this, "You have already placed the order", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PaymentActivity.this, getString(R.string.already_placed_order), Toast.LENGTH_SHORT).show();
                     }
                 }
             }

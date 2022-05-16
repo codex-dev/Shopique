@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import demo.assignment.my_cart.R;
+import demo.assignment.my_cart.ui.Constants;
 import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 
 public class DeliveryLocationActivity extends CommonActivity implements AppbarListener {
@@ -42,7 +43,7 @@ public class DeliveryLocationActivity extends CommonActivity implements AppbarLi
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deliveryLocation = "HOME";
+                deliveryLocation = Constants.HOME;
                 updateView();
             }
         });
@@ -50,7 +51,7 @@ public class DeliveryLocationActivity extends CommonActivity implements AppbarLi
         btnWork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deliveryLocation = "WORK";
+                deliveryLocation = Constants.WORK;
                 updateView();
             }
         });
@@ -69,7 +70,7 @@ public class DeliveryLocationActivity extends CommonActivity implements AppbarLi
     }
 
     private void updateView() {
-        boolean isHomeSelected = deliveryLocation.equalsIgnoreCase("HOME");
+        boolean isHomeSelected = deliveryLocation.equalsIgnoreCase(Constants.HOME);
 
         btnHome.setTextColor(isHomeSelected ?
                 ContextCompat.getColor(DeliveryLocationActivity.this, R.color.white) :

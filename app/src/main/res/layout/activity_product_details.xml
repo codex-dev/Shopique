@@ -125,6 +125,7 @@
                         android:id="@+id/btnMinus"
                         android:layout_width="40dp"
                         android:layout_height="50dp"
+                        android:backgroundTint="@color/blue_light"
                         android:padding="0dp"
                         android:text="-"
                         android:textSize="25sp" />
@@ -136,7 +137,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:gravity="center"
-                        android:text="0"
+                        tools:text="0"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -145,6 +146,7 @@
                         android:id="@+id/btnPlus"
                         android:layout_width="40dp"
                         android:layout_height="50dp"
+                        android:backgroundTint="@color/blue_light"
                         android:padding="0dp"
                         android:text="+"
                         android:textSize="25sp" />

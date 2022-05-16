@@ -18,6 +18,7 @@ import java.util.List;
 
 import demo.assignment.my_cart.R;
 import demo.assignment.my_cart.models.Order;
+import demo.assignment.my_cart.ui.Constants;
 import demo.assignment.my_cart.ui.screens.OrderDetailsActivity;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
@@ -49,11 +50,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.tvOrderId.setText(MessageFormat.format("#{0}", order.getOrderId()));
 
         switch (order.getOrderStatus()) {
-            case "PENDING":
+            case Constants.PENDING:
                 holder.tvOrderStatus.setText(context.getResources().getString(R.string.pending));
                 holder.tvOrderStatus.setTextColor(ContextCompat.getColor(context, R.color.status_pending));
                 break;
-            case "RECEIVED":
+            case Constants.RECEIVED:
                 holder.tvOrderStatus.setText(context.getResources().getString(R.string.received));
                 holder.tvOrderStatus.setTextColor(ContextCompat.getColor(context, R.color.status_received));
         }

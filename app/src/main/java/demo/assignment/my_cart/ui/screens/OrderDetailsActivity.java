@@ -25,6 +25,7 @@ import demo.assignment.my_cart.R;
 import demo.assignment.my_cart.models.Order;
 import demo.assignment.my_cart.models.OrderItem;
 import demo.assignment.my_cart.storage.SharedPrefListener;
+import demo.assignment.my_cart.ui.Constants;
 import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 
 public class OrderDetailsActivity extends CommonActivity implements AppbarListener {
@@ -63,12 +64,12 @@ public class OrderDetailsActivity extends CommonActivity implements AppbarListen
         tvOrderId.setText(MessageFormat.format("#{0}", order.getOrderId()));
 
         switch (order.getOrderStatus()) {
-            case "PENDING":
+            case Constants.PENDING:
                 btnScanQR.setVisibility(View.VISIBLE);
                 tvOrderStatus.setText(getResources().getString(R.string.pending));
                 tvOrderStatus.setTextColor(ContextCompat.getColor(this, R.color.status_pending));
                 break;
-            case "RECEIVED":
+            case Constants.RECEIVED:
                 btnScanQR.setVisibility(View.GONE);
                 tvOrderStatus.setText(getResources().getString(R.string.received));
                 tvOrderStatus.setTextColor(ContextCompat.getColor(this, R.color.status_received));
@@ -129,7 +130,7 @@ public class OrderDetailsActivity extends CommonActivity implements AppbarListen
             @Override
             public void onClick(View view) {
                 IntentIntegrator intentIntegrator = new IntentIntegrator(OrderDetailsActivity.this);
-                intentIntegrator.setPrompt("Scan QR Code");
+                intentIntegrator.setPrompt(getString(R.string.scan_qr_code));
                 intentIntegrator.setOrientationLocked(false);
                 intentIntegrator.initiateScan();
             }
@@ -144,7 +145,7 @@ public class OrderDetailsActivity extends CommonActivity implements AppbarListen
         // toast a message as "cancelled"
         if (intentResult != null) {
             if (intentResult.getContents() == null) {
-                Toast.makeText(getBaseContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), getString(R.string.cancelled), Toast.LENGTH_SHORT).show();
             } else {
                 // if the intentResult is not null we'll set
                 // the content and format of scan message
@@ -155,7 +156,10 @@ public class OrderDetailsActivity extends CommonActivity implements AppbarListen
                     // if order id equals to the id in qr code, mark the order as received
                     if (order.getOrderId() == oId) {
                         TreeMap<Integer, Order> tm = getOrders();
-                        tm.get(order.getOrderId()).setOrderStatus("RECEIVED");
+                        Order odr = tm.get(order.getOrderId());
+                        if (odr != null) {
+                            odr.setOrderStatus(Constants.RECEIVED);
+                        }
 
                         updateOrders(tm, new SharedPrefListener() {
                             @Override
@@ -163,7 +167,7 @@ public class OrderDetailsActivity extends CommonActivity implements AppbarListen
                                 btnScanQR.setVisibility(View.GONE);
                                 tvOrderStatus.setText(getResources().getString(R.string.received));
                                 tvOrderStatus.setTextColor(ContextCompat.getColor(OrderDetailsActivity.this, R.color.status_received));
-                                Toast.makeText(OrderDetailsActivity.this, "Order has been marked as RECEIVED", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(OrderDetailsActivity.this, getString(R.string.order_marked_as_received), Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -172,10 +176,10 @@ public class OrderDetailsActivity extends CommonActivity implements AppbarListen
                             }
                         });
                     } else {
-                        Toast.makeText(this, "Invalid QR code", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.invalid_qr_code), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(this, "Invalid QR code", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.invalid_qr_code), Toast.LENGTH_SHORT).show();
                 }
             }
         } else {

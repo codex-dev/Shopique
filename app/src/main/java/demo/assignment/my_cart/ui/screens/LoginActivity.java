@@ -65,7 +65,6 @@ public class LoginActivity extends CommonActivity {
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
         exitApp();
     }
 }

@@ -102,9 +102,9 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
             public void onClick(View view) {
                 if (quantity > 0) {
                     LinkedHashMap<Integer, CartItem> hmCartItems = getCartItems();
-                    boolean hasProduct = hmCartItems.containsKey(product.getId());
+                    boolean isInCart = hmCartItems.containsKey(product.getId());
 
-                    if (hasProduct) {
+                    if (isInCart) {
                         hmCartItems.get(product.getId()).setQty(quantity);
                     } else {
                         hmCartItems.put(product.getId(), new CartItem(product.getId(),
@@ -115,7 +115,7 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
                         @Override
                         public void onSuccess() {
                             Toast.makeText(ProductDetailsActivity.this,
-                                    hasProduct ? getString(R.string.product_qty_updated) : getString(R.string.product_added_to_cart),
+                                    isInCart ? getString(R.string.product_qty_updated) : getString(R.string.product_added_to_cart),
                                     Toast.LENGTH_SHORT).show();
 //                            TODO gotoCart();
                         }

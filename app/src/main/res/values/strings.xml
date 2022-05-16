@@ -55,10 +55,15 @@
     <string name="pending">Pending</string>
     <string name="placed_date_time">Placed Date/Time</string>
     <string name="order">Order</string>
-    <string name="scan_qr">Scan QR</string>
+    <string name="scan_qr_code">Scan QR Code</string>
     <string name="order_items">Order Items</string>
     <string name="received">Received</string>
     <string name="product">Product</string>
     <string name="sub_total">Sub Total</string>
     <string name="qty">Qty</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="invalid_qr_code">Invalid QR code</string>
+    <string name="order_marked_as_received">Order has been marked as RECEIVED</string>
+    <string name="order_placed_successfully">Order has been placed successfully</string>
+    <string name="already_placed_order">You have already placed the order</string>
 </resources>

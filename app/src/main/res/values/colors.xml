@@ -15,5 +15,9 @@
     <color name="transparent">#00ffffff</color>
 
     <color name="status_pending">#ebb134</color>
-    <color name="status_received">#34eb3a</color>
+    <color name="status_received">#00c853</color>
+
+    <color name="blue_default">#448aff</color>
+    <color name="blue_light">#83b9ff</color>
+    <color name="blue_dark">#005ecb</color>
 </resources>

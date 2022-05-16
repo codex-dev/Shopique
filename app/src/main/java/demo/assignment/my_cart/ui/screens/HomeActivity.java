@@ -63,7 +63,6 @@ public class HomeActivity extends CommonActivity implements AppbarListener {
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
         exitApp();
     }
 }

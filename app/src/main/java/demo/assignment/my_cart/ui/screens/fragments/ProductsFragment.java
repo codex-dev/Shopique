@@ -38,7 +38,6 @@ public class ProductsFragment extends Fragment {
     private HomeActivity homeActivity;
     private ProductGridAdapter productGridAdapter;
     private ArrayList<Product> listProducts;
-    private ArrayList<String> listCategories;
     private ChipGroup cgCategories;
     private GridView gvProducts;
     private ProgressBar progressBar;
@@ -57,7 +56,6 @@ public class ProductsFragment extends Fragment {
         }
 
         listProducts = new ArrayList<>();
-        listCategories = new ArrayList<>();
         networkService = NetworkService.getInstance();
         gson = new Gson();
 
@@ -90,7 +88,7 @@ public class ProductsFragment extends Fragment {
                         selectedCategory = chip.getText().toString();
 
                         chip.setTextColor(getResources().getColor(R.color.white));
-                        chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(homeActivity, R.color.purple_500)));
+                        chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(homeActivity, R.color.blue_default)));
                     } else {
                         chip.setTextColor(getResources().getColor(R.color.black));
                         chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(homeActivity, R.color.light_grey)));
@@ -113,7 +111,6 @@ public class ProductsFragment extends Fragment {
     }
 
     private void loadProductCategories() {
-        listCategories.clear();
         showProgressbar(true);
 
         networkService.getProductCategories(new NetworkListener() {
@@ -125,6 +122,7 @@ public class ProductsFragment extends Fragment {
                         showProgressbar(false);
 
                         try {
+                            ArrayList<String> listCategories = new ArrayList<>();
                             JSONArray jsonArray = new JSONArray(response);
 
                             for (int i = 0; i < jsonArray.length(); i++) {
