@@ -11,12 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.text.MessageFormat;
 import java.util.List;
 
 import demo.assignment.my_cart.R;
 import demo.assignment.my_cart.models.Order;
-import demo.assignment.my_cart.models.OrderStatus;
 import demo.assignment.my_cart.ui.screens.OrderDetailsActivity;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
@@ -48,12 +49,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.tvOrderId.setText(MessageFormat.format("#{0}", order.getOrderId()));
 
         switch (order.getOrderStatus()) {
-            case PENDING:
-                holder.tvOrderStatus.setText(OrderStatus.PENDING.name());
+            case "PENDING":
+                holder.tvOrderStatus.setText(context.getResources().getString(R.string.pending));
                 holder.tvOrderStatus.setTextColor(ContextCompat.getColor(context, R.color.status_pending));
                 break;
-            case RECEIVED:
-                holder.tvOrderStatus.setText(OrderStatus.RECEIVED.name());
+            case "RECEIVED":
+                holder.tvOrderStatus.setText(context.getResources().getString(R.string.received));
                 holder.tvOrderStatus.setTextColor(ContextCompat.getColor(context, R.color.status_received));
         }
 
@@ -65,7 +66,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, OrderDetailsActivity.class);
-                i.putExtra("order", order);
+                i.putExtra("order", new Gson().toJson(order));
                 context.startActivity(i);
             }
         });

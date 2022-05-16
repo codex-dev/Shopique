@@ -33,9 +33,10 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
-        setupActionbar(getString(R.string.product_details), true, false);
 
         appBarClickListener = this;
+        product = getIntent().getParcelableExtra("product");
+        setupActionbar(product.getTitle(), true, false);
 
         initViews();
         setValues();
@@ -56,8 +57,6 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
     }
 
     private void setValues() {
-        product = getIntent().getParcelableExtra("product");
-
         if (!isNullOrEmpty(product.getImage())) {
             Glide.with(this)
                     .load(product.getImage())

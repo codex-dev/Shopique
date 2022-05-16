@@ -34,13 +34,18 @@ public class OrdersFragment extends Fragment {
         }
 
         initViews(v);
-        loadOrders();
         return v;
     }
 
     private void initViews(View v) {
         rvOrders = v.findViewById(R.id.rvOrders);
         tvEmpty = v.findViewById(R.id.tvEmpty);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadOrders();
     }
 
     private void loadOrders() {

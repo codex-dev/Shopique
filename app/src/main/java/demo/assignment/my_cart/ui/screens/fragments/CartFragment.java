@@ -45,9 +45,14 @@ public class CartFragment extends Fragment {
 
         initViews(v);
         setEventListeners();
-        loadCart();
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadCart();
     }
 
     private void initViews(View v) {
