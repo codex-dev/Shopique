@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Cart</string>
+    <string name="app_name">Shopique</string>
     <string name="title_products">Products</string>
     <string name="title_cart">Cart</string>
     <string name="title_orders">Orders</string>
@@ -7,7 +7,7 @@
     <string name="password">Password</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="sign_in">Sign In</string>
-    <string name="new_to_my_cart">New to My Cart?</string>
+    <string name="new_to_my_cart">New to Shopique?</string>
     <string name="sign_up">Sign Up</string>
     <string name="err_input_username">Please input username</string>
     <string name="err_input_password">Please input password</string>
@@ -58,4 +58,7 @@
     <string name="scan_qr">Scan QR</string>
     <string name="order_items">Order Items</string>
     <string name="received">Received</string>
+    <string name="product">Product</string>
+    <string name="sub_total">Sub Total</string>
+    <string name="qty">Qty</string>
 </resources>

@@ -150,6 +150,42 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@color/default_label_color"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/qty"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@color/default_label_color"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sub_total"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@color/default_label_color"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/lytOrderItems"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

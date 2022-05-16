@@ -79,45 +79,49 @@ public class OrderDetailsActivity extends CommonActivity implements AppbarListen
         tvTotalAmount.setText(MessageFormat.format("${0}", order.getTotalAmount()));
 
         for (OrderItem orderItem : order.getOrderItems()) {
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(0, 0, 0, convertDpToPx(10));
+
             LinearLayout childLayout = new LinearLayout(this);
-            childLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
+            childLayout.setLayoutParams(layoutParams);
             childLayout.setOrientation(LinearLayout.HORIZONTAL);
             childLayout.setWeightSum(3);
-
-            LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+            childLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_underline));
 
             TextView tvProductName = new TextView(this);
-            tvProductName.setLayoutParams(tvParams);
             tvProductName.setText(orderItem.getProductName());
-            tvProductName.setTextColor(ContextCompat.getColor(this, R.color.default_label_color));
-            tvProductName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            tvProductName.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_underline));
-            tvProductName.setMaxLines(1);
             tvProductName.setGravity(Gravity.START);
+            childLayout.addView(setCommonProperties(tvProductName));
 
             TextView tvQty = new TextView(this);
-            tvQty.setLayoutParams(tvParams);
             tvQty.setText(MessageFormat.format("x{0}", orderItem.getQty()));
-            tvQty.setTextColor(ContextCompat.getColor(this, R.color.default_label_color));
-            tvQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            tvQty.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_underline));
             tvQty.setGravity(Gravity.CENTER);
+            childLayout.addView(setCommonProperties(tvQty));
 
             TextView tvSubTotal = new TextView(this);
-            tvSubTotal.setLayoutParams(tvParams);
             tvSubTotal.setText(MessageFormat.format("${0}", orderItem.getSubTotal()));
-            tvSubTotal.setTextColor(ContextCompat.getColor(this, R.color.default_label_color));
-            tvSubTotal.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            tvSubTotal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_underline));
             tvSubTotal.setGravity(Gravity.END);
+            childLayout.addView(setCommonProperties(tvSubTotal));
 
-            childLayout.addView(tvProductName);
-            childLayout.addView(tvQty);
-            childLayout.addView(tvSubTotal);
             lytOrderItems.addView(childLayout);
         }
+    }
+
+    private TextView setCommonProperties(TextView tv) {
+        LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+        tv.setLayoutParams(tvParams);
+        tv.setTextColor(ContextCompat.getColor(this, R.color.default_label_color));
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        tv.setMaxLines(1);
+        return tv;
+    }
+
+    private int convertDpToPx(int dp) {
+        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                getResources().getDisplayMetrics());
+        return (int) px;
     }
 
     private void setActionListeners() {
@@ -145,27 +149,33 @@ public class OrderDetailsActivity extends CommonActivity implements AppbarListen
                 // if the intentResult is not null we'll set
                 // the content and format of scan message
                 String result = intentResult.getContents();
-                int oId = Integer.parseInt(result.split("#")[1]);
+                try {
+                    int oId = Integer.parseInt(result.split("#")[1]);
 
-                // if order id equals to the id in qr code, mark the order as received
-                if (order.getOrderId() == oId) {
-                    TreeMap<Integer, Order> tm = getOrders();
-                    tm.get(order.getOrderId()).setOrderStatus("RECEIVED");
+                    // if order id equals to the id in qr code, mark the order as received
+                    if (order.getOrderId() == oId) {
+                        TreeMap<Integer, Order> tm = getOrders();
+                        tm.get(order.getOrderId()).setOrderStatus("RECEIVED");
 
-                    updateOrders(tm, new SharedPrefListener() {
-                        @Override
-                        public void onSuccess() {
-                            btnScanQR.setVisibility(View.GONE);
-                            tvOrderStatus.setText(getResources().getString(R.string.received));
-                            tvOrderStatus.setTextColor(ContextCompat.getColor(OrderDetailsActivity.this, R.color.status_received));
-                            Toast.makeText(OrderDetailsActivity.this, "Order has been marked as RECEIVED", Toast.LENGTH_SHORT).show();
-                        }
+                        updateOrders(tm, new SharedPrefListener() {
+                            @Override
+                            public void onSuccess() {
+                                btnScanQR.setVisibility(View.GONE);
+                                tvOrderStatus.setText(getResources().getString(R.string.received));
+                                tvOrderStatus.setTextColor(ContextCompat.getColor(OrderDetailsActivity.this, R.color.status_received));
+                                Toast.makeText(OrderDetailsActivity.this, "Order has been marked as RECEIVED", Toast.LENGTH_SHORT).show();
+                            }
 
-                        @Override
-                        public void onError() {
+                            @Override
+                            public void onError() {
 
-                        }
-                    });
+                            }
+                        });
+                    } else {
+                        Toast.makeText(this, "Invalid QR code", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(this, "Invalid QR code", Toast.LENGTH_SHORT).show();
                 }
             }
         } else {
