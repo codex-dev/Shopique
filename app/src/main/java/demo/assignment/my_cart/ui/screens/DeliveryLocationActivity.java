@@ -19,6 +19,8 @@ public class DeliveryLocationActivity extends CommonActivity implements AppbarLi
         setupActionbar(getString(R.string.delivery_location), true, false);
         dismissKeyboard(findViewById(R.id.delivery_location_activity), DeliveryLocationActivity.this);
 
+        appBarClickListener = this;
+
         initViews();
         setEventListeners();
     }
@@ -33,6 +35,7 @@ public class DeliveryLocationActivity extends CommonActivity implements AppbarLi
             public void onClick(View view) {
                 Intent i = new Intent(DeliveryLocationActivity.this, PaymentActivity.class);
                 i.putExtras(getIntent());
+                i.putExtra("del_location", "HOME");
                 startActivity(i);
             }
         });

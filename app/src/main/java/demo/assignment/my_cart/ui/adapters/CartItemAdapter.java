@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -110,7 +110,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
 
     private void removeItem(int position, int prodId) {
         //update shared preference
-        HashMap<Integer, CartItem> hashMap = commonActivity.getCartItems();
+        LinkedHashMap<Integer, CartItem> hashMap = commonActivity.getCartItems();
         hashMap.remove(prodId);
 
         commonActivity.updateCartItems(hashMap, new SharedPrefListener() {
@@ -136,7 +136,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
 
     private void updateQuantity(int position, int prodId, int newQty) {
         // update shared preference
-        HashMap<Integer, CartItem> hashMap = commonActivity.getCartItems();
+        LinkedHashMap<Integer, CartItem> hashMap = commonActivity.getCartItems();
         CartItem item = hashMap.get(prodId);
         if (item != null) {
             item.setQty(newQty);

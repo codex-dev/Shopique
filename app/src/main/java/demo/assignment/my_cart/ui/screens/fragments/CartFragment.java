@@ -23,7 +23,6 @@ import demo.assignment.my_cart.models.CartItem;
 import demo.assignment.my_cart.ui.adapters.CartItemAdapter;
 import demo.assignment.my_cart.ui.screens.DeliveryLocationActivity;
 import demo.assignment.my_cart.ui.screens.HomeActivity;
-import demo.assignment.my_cart.ui.screens.PaymentActivity;
 import demo.assignment.my_cart.ui.screens.listeners.CartUpdateListener;
 
 public class CartFragment extends Fragment {

@@ -12,4 +12,7 @@
     <color name="default_grey">#808080</color>
     <color name="light_grey">#E5E5E5</color>
     <color name="red">#FF0000</color>
+
+    <color name="status_pending">#ebb134</color>
+    <color name="status_received">#34eb3a</color>
 </resources>

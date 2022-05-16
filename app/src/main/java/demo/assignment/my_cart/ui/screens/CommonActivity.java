@@ -21,11 +21,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Objects;
+import java.util.TreeMap;
 
 import demo.assignment.my_cart.R;
 import demo.assignment.my_cart.models.CartItem;
+import demo.assignment.my_cart.models.Order;
 import demo.assignment.my_cart.services.ConnectionStatusService;
 import demo.assignment.my_cart.storage.SharedPref;
 import demo.assignment.my_cart.storage.SharedPrefListener;
@@ -140,6 +142,7 @@ public class CommonActivity extends AppCompatActivity {
         ivRight.setOnClickListener(view -> appBarClickListener.onRightIconClicked());
     }
 
+
     // shared preference
     protected void signInUser() {
         sharedPref.setLoggedIn(true, new SharedPrefListener() {
@@ -174,13 +177,26 @@ public class CommonActivity extends AppCompatActivity {
         return sharedPref.isLoggedIn();
     }
 
-    public HashMap<Integer, CartItem> getCartItems() {
+    public LinkedHashMap<Integer, CartItem> getCartItems() {
         return sharedPref.getCartDetails();
     }
 
-    public void updateCartItems(HashMap<Integer, CartItem> hashMap, SharedPrefListener listener) {
+    public void updateCartItems(LinkedHashMap<Integer, CartItem> hashMap, SharedPrefListener listener) {
         sharedPref.setCartDetails(hashMap, listener);
     }
+
+    public void resetCart(SharedPrefListener listener) {
+        sharedPref.resetCart(listener);
+    }
+
+    public TreeMap<Integer, Order> getOrders() {
+        return sharedPref.getOrders();
+    }
+
+    public void updateOrders(TreeMap<Integer, Order> hashMap, SharedPrefListener listener) {
+        sharedPref.setOrders(hashMap, listener);
+    }
+
 
     // ui navigation
     protected void proceedToHome() {

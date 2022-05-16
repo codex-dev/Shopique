@@ -20,4 +20,11 @@ public class DateFormatter {
         String dateLocal = sdfOutPutToSend.format(date);
         return dateLocal;
     }
+
+    public static String getCurrentDateTimeLocal() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMM-dd hh.mm aa");
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        return formatter.format(date);
+    }
 }

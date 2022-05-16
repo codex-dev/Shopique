@@ -51,4 +51,7 @@
     <string name="favourites">Favourites</string>
     <string name="home">Home</string>
     <string name="work">Work</string>
+    <string name="order_list_is_empty">Orders list is empty</string>
+    <string name="pending">Pending</string>
+    <string name="placed_date_time">Placed Date/Time</string>
 </resources>

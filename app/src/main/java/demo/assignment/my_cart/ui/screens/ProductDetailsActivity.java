@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.text.MessageFormat;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import demo.assignment.my_cart.R;
 import demo.assignment.my_cart.models.CartItem;
@@ -102,7 +102,7 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
             @Override
             public void onClick(View view) {
                 if (quantity > 0) {
-                    HashMap<Integer, CartItem> hmCartItems = getCartItems();
+                    LinkedHashMap<Integer, CartItem> hmCartItems = getCartItems();
                     boolean hasProduct = hmCartItems.containsKey(product.getId());
 
                     if (hasProduct) {
