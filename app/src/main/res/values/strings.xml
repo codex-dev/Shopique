@@ -66,4 +66,9 @@
     <string name="order_marked_as_received">Order has been marked as RECEIVED</string>
     <string name="order_placed_successfully">Order has been placed successfully</string>
     <string name="already_placed_order">You have already placed the order</string>
+    <string name="are_you_sure_sign_out">Are you sure you want to sign out?</string>
+    <string name="are_you_sure_exit_app">Are you sure you want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="exit_app">Exit App</string>
 </resources>

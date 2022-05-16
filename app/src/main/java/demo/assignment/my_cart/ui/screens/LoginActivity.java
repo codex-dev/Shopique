@@ -10,8 +10,13 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 
 import demo.assignment.my_cart.R;
+import demo.assignment.my_cart.ui.screens.dialog.AlertDialogListener;
+import demo.assignment.my_cart.ui.screens.dialog.CustomAlertDialog;
+import demo.assignment.my_cart.ui.screens.dialog.DialogType;
 
 public class LoginActivity extends CommonActivity {
+
+    private static final String TAG = "LoginActivity";
 
     private TextInputEditText etUsername;
     private TextInputEditText etPassword;
@@ -65,6 +70,6 @@ public class LoginActivity extends CommonActivity {
 
     @Override
     public void onBackPressed() {
-        exitApp();
+        exitApp(TAG);
     }
 }

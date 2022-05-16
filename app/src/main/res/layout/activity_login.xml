@@ -20,7 +20,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginBottom="30dp"
-            android:src="@drawable/img_logo" />
+            android:src="@drawable/img_login" />
 
         <TextView
             android:layout_width="wrap_content"

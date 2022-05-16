@@ -15,6 +15,7 @@ import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 
 public class HomeActivity extends CommonActivity implements AppbarListener {
 
+    private static final String TAG = "HomeActivity";
     private BottomNavigationView navView;
 
     @Override
@@ -57,12 +58,11 @@ public class HomeActivity extends CommonActivity implements AppbarListener {
 
     @Override
     public void onRightIconClicked() {
-//        Toast.makeText(this, "Logout Clicked", Toast.LENGTH_SHORT).show();
-        signOutUser();
+        signOutUser(TAG);
     }
 
     @Override
     public void onBackPressed() {
-        exitApp();
+        exitApp(TAG);
     }
 }

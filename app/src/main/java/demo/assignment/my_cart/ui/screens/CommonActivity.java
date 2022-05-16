@@ -31,6 +31,9 @@ import demo.assignment.my_cart.models.Order;
 import demo.assignment.my_cart.services.ConnectionStatusService;
 import demo.assignment.my_cart.storage.SharedPref;
 import demo.assignment.my_cart.storage.SharedPrefListener;
+import demo.assignment.my_cart.ui.screens.dialog.AlertDialogListener;
+import demo.assignment.my_cart.ui.screens.dialog.CustomAlertDialog;
+import demo.assignment.my_cart.ui.screens.dialog.DialogType;
 import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 
 public class CommonActivity extends AppCompatActivity {
@@ -159,18 +162,29 @@ public class CommonActivity extends AppCompatActivity {
 
     }
 
-    protected void signOutUser() {
-        sharedPref.setLoggedIn(false, new SharedPrefListener() {
+    public void signOutUser(String tag) {
+        CustomAlertDialog customAlertDialog = new CustomAlertDialog(this, DialogType.SIGN_OUT, new AlertDialogListener() {
             @Override
-            public void onSuccess() {
-                gotoLogin();
+            public void onPositiveButtonClicked() {
+                sharedPref.setLoggedIn(false, new SharedPrefListener() {
+                    @Override
+                    public void onSuccess() {
+                        gotoLogin();
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
             }
 
             @Override
-            public void onError() {
+            public void onNegativeButtonClicked() {
 
             }
         });
+        customAlertDialog.show(getSupportFragmentManager(), tag);
     }
 
     protected boolean isUserSignedIn() {
@@ -211,10 +225,21 @@ public class CommonActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    protected void exitApp() {
-        Intent a = new Intent(Intent.ACTION_MAIN);
-        a.addCategory(Intent.CATEGORY_HOME);
-        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(a);
+    protected void exitApp(String tag) {
+        CustomAlertDialog customAlertDialog = new CustomAlertDialog(this, DialogType.EXIT_APP, new AlertDialogListener() {
+            @Override
+            public void onPositiveButtonClicked() {
+                Intent a = new Intent(Intent.ACTION_MAIN);
+                a.addCategory(Intent.CATEGORY_HOME);
+                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(a);
+            }
+
+            @Override
+            public void onNegativeButtonClicked() {
+
+            }
+        });
+        customAlertDialog.show(getSupportFragmentManager(), tag);
     }
 }
