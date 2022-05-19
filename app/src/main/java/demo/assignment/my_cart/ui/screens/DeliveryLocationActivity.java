@@ -13,6 +13,9 @@ import demo.assignment.my_cart.R;
 import demo.assignment.my_cart.ui.Constants;
 import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 
+/**
+ * Display delivery locations added by user and let him to pick a location
+ */
 public class DeliveryLocationActivity extends CommonActivity implements AppbarListener {
 
     private TextView btnHome, btnWork;
@@ -69,6 +72,9 @@ public class DeliveryLocationActivity extends CommonActivity implements AppbarLi
         btnHome.performClick();
     }
 
+    /**
+     * Update background and text color of favourite delivery locations based on user selection
+     */
     private void updateView() {
         boolean isHomeSelected = deliveryLocation.equalsIgnoreCase(Constants.HOME);
 

@@ -19,6 +19,9 @@ import demo.assignment.my_cart.models.Order;
 import demo.assignment.my_cart.ui.adapters.OrderAdapter;
 import demo.assignment.my_cart.ui.screens.HomeActivity;
 
+/**
+ * Fragment to display placed orders list
+ */
 public class OrdersFragment extends Fragment {
 
     private HomeActivity homeActivity;

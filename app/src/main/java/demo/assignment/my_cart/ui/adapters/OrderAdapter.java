@@ -21,6 +21,9 @@ import demo.assignment.my_cart.models.Order;
 import demo.assignment.my_cart.ui.Constants;
 import demo.assignment.my_cart.ui.screens.OrderDetailsActivity;
 
+/**
+ * Adapter to display orders list
+ */
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
     private final List<Order> listOrders;

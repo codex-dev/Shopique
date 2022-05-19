@@ -27,6 +27,9 @@ import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 import demo.assignment.my_cart.ui.util.DateFormatter;
 import demo.assignment.my_cart.ui.util.TextFormatter;
 
+/**
+ * Payment activity to received payment details input by user
+ */
 public class PaymentActivity extends CommonActivity implements AppbarListener {
 
     private TextInputEditText etCHName, etCardNo, etExpDate, etCVC;
@@ -115,8 +118,8 @@ public class PaymentActivity extends CommonActivity implements AppbarListener {
                                 resetCart(new SharedPrefListener() {
                                     @Override
                                     public void onSuccess() {
+                                        // user will be notified only after order has been placed and cart has been cleared.
                                         Toast.makeText(PaymentActivity.this, getString(R.string.order_placed_successfully), Toast.LENGTH_SHORT).show();
-//                                  TODO gotoOrders();
                                     }
 
                                     @Override

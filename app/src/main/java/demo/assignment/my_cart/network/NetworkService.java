@@ -11,6 +11,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * Handle api requests and send success/error response back to ui
+ */
 public class NetworkService {
     private static NetworkService networkService;
     private final OkHttpClient okHttpClient;

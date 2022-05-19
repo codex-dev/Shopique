@@ -23,6 +23,9 @@ import demo.assignment.my_cart.R;
 import demo.assignment.my_cart.models.Product;
 import demo.assignment.my_cart.ui.screens.ProductDetailsActivity;
 
+/**
+ * Adapter to display products in a gridview
+ */
 public class ProductGridAdapter extends ArrayAdapter<Product> {
 
     private final Context context;

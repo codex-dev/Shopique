@@ -32,6 +32,9 @@ import demo.assignment.my_cart.ui.adapters.ProductGridAdapter;
 import demo.assignment.my_cart.ui.screens.HomeActivity;
 import demo.assignment.my_cart.ui.util.TextFormatter;
 
+/**
+ * Fragment to display and filter products using given product categories
+ */
 public class ProductsFragment extends Fragment {
 
     private static final String TAG = "ProductsFragment : ";
@@ -84,6 +87,7 @@ public class ProductsFragment extends Fragment {
                 for (int i = 1; i <= group.getChildCount(); i++) {
                     Chip chip = group.findViewById(i);
 
+                    // update chip text and background colors based on user selection
                     if (checkedId == chip.getId()) {
                         selectedCategory = chip.getText().toString();
 
@@ -100,6 +104,7 @@ public class ProductsFragment extends Fragment {
             }
         });
 
+        // retry loading products and categories once the internet connection has been restored
         btnRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,6 +115,9 @@ public class ProductsFragment extends Fragment {
         });
     }
 
+    /**
+     * Load product categories from api request
+     */
     private void loadProductCategories() {
         showProgressbar(true);
 
@@ -151,7 +159,6 @@ public class ProductsFragment extends Fragment {
                     @Override
                     public void run() {
                         showProgressbar(false);
-//                        Toast.makeText(homeActivity, getString(R.string.err_loading_product_categories), Toast.LENGTH_SHORT).show();
                         lytNoConnection.setVisibility(View.VISIBLE);
                     }
                 });
@@ -159,6 +166,9 @@ public class ProductsFragment extends Fragment {
         });
     }
 
+    /**
+     * Load products from api request
+     */
     private void loadProducts() {
         listProducts.clear();
         showProgressbar(true);
@@ -195,7 +205,6 @@ public class ProductsFragment extends Fragment {
                     @Override
                     public void run() {
                         showProgressbar(false);
-//                        Toast.makeText(homeActivity, getString(R.string.err_loading_products), Toast.LENGTH_SHORT).show();
                         lytNoConnection.setVisibility(View.VISIBLE);
                     }
                 });
@@ -203,6 +212,9 @@ public class ProductsFragment extends Fragment {
         });
     }
 
+    /**
+     * Filter products by category from api request
+     */
     private void loadProductsByCategory(String selectedCategory) {
         listProducts.clear();
         showProgressbar(true);
@@ -238,7 +250,6 @@ public class ProductsFragment extends Fragment {
                     public void run() {
                         showProgressbar(false);
                         lytNoConnection.setVisibility(View.VISIBLE);
-//                        Toast.makeText(homeActivity, getString(R.string.err_loading_products), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

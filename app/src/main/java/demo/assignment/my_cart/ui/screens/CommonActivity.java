@@ -36,6 +36,9 @@ import demo.assignment.my_cart.ui.screens.dialog.CustomAlertDialog;
 import demo.assignment.my_cart.ui.screens.dialog.DialogType;
 import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 
+/**
+ * Immediate parent activity of all other activities to handle common operations
+ */
 public class CommonActivity extends AppCompatActivity {
 
     public static final String broadcastStringForAction = "checkInternet";
@@ -64,9 +67,7 @@ public class CommonActivity extends AppCompatActivity {
     }
 
     private void showConnectionStatus(boolean isConnected) {
-        if (isConnected) {
-//            Toast.makeText(this, getString(R.string.you_are_online), Toast.LENGTH_SHORT).show();
-        } else {
+        if (!isConnected) {
             Toast.makeText(this, getString(R.string.you_are_offline), Toast.LENGTH_SHORT).show();
         }
     }
@@ -126,6 +127,12 @@ public class CommonActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Setup and display customized action bar
+     * @param title
+     * @param showLeftIcon
+     * @param showRightIcon
+     */
     public void setupActionbar(String title, boolean showLeftIcon, boolean showRightIcon) {
         Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.appbar_action);
@@ -146,7 +153,9 @@ public class CommonActivity extends AppCompatActivity {
     }
 
 
-    // shared preference
+    /**
+     * Sign in and navigate user to homescreen
+     */
     protected void signInUser() {
         sharedPref.setLoggedIn(true, new SharedPrefListener() {
             @Override
@@ -162,6 +171,10 @@ public class CommonActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Display an alert, sign out and take user back to login screen
+     * @param tag
+     */
     public void signOutUser(String tag) {
         CustomAlertDialog customAlertDialog = new CustomAlertDialog(this, DialogType.SIGN_OUT, new AlertDialogListener() {
             @Override
@@ -212,7 +225,6 @@ public class CommonActivity extends AppCompatActivity {
     }
 
 
-    // ui navigation
     protected void proceedToHome() {
         Intent i = new Intent(this, HomeActivity.class);
         startActivity(i);
@@ -225,6 +237,10 @@ public class CommonActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Display an alert, and let user to decide whether to exit the app or not
+     * @param tag
+     */
     protected void exitApp(String tag) {
         CustomAlertDialog customAlertDialog = new CustomAlertDialog(this, DialogType.EXIT_APP, new AlertDialogListener() {
             @Override

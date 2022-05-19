@@ -20,6 +20,9 @@ import demo.assignment.my_cart.models.Product;
 import demo.assignment.my_cart.storage.SharedPrefListener;
 import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 
+/**
+ * Display details of selected product
+ */
 public class ProductDetailsActivity extends CommonActivity implements AppbarListener {
 
     private ImageView ivProduct;
@@ -104,6 +107,7 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
                     LinkedHashMap<Integer, CartItem> hmCartItems = getCartItems();
                     boolean isInCart = hmCartItems.containsKey(product.getId());
 
+                    // if product is already in the cart, update only the quantity else add to cart
                     if (isInCart) {
                         hmCartItems.get(product.getId()).setQty(quantity);
                     } else {
@@ -117,7 +121,6 @@ public class ProductDetailsActivity extends CommonActivity implements AppbarList
                             Toast.makeText(ProductDetailsActivity.this,
                                     isInCart ? getString(R.string.product_qty_updated) : getString(R.string.product_added_to_cart),
                                     Toast.LENGTH_SHORT).show();
-//                            TODO gotoCart();
                         }
 
                         @Override

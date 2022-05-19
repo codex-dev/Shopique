@@ -28,6 +28,9 @@ import demo.assignment.my_cart.storage.SharedPrefListener;
 import demo.assignment.my_cart.ui.Constants;
 import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 
+/**
+ * Display details of selected order
+ */
 public class OrderDetailsActivity extends CommonActivity implements AppbarListener {
 
     private Order order;
@@ -63,6 +66,7 @@ public class OrderDetailsActivity extends CommonActivity implements AppbarListen
     private void setValues() {
         tvOrderId.setText(MessageFormat.format("#{0}", order.getOrderId()));
 
+        // display order status and show/hide scan qr button based on order status
         switch (order.getOrderStatus()) {
             case Constants.PENDING:
                 btnScanQR.setVisibility(View.VISIBLE);

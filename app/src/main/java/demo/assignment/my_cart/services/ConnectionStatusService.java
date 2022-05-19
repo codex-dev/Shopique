@@ -13,6 +13,9 @@ import androidx.annotation.Nullable;
 
 import demo.assignment.my_cart.ui.screens.CommonActivity;
 
+/**
+ * Service to monitor network connection status
+ */
 public class ConnectionStatusService extends Service {
 
     Handler handler = new Handler();

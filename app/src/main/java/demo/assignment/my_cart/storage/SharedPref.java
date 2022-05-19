@@ -13,6 +13,10 @@ import demo.assignment.my_cart.models.CartItem;
 import demo.assignment.my_cart.models.Order;
 import demo.assignment.my_cart.ui.util.TextFormatter;
 
+/**
+ * Read and write values to shared preferences such as user logged in status,
+ * cart details and orders list
+ */
 public class SharedPref {
     public static final String MY_PREFERENCES = "my_prefs";
     public static final String CART_BADGE_COUNT = "cart_product_count";

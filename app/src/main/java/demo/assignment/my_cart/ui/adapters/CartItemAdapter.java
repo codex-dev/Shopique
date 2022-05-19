@@ -24,13 +24,16 @@ import demo.assignment.my_cart.storage.SharedPrefListener;
 import demo.assignment.my_cart.ui.screens.CommonActivity;
 import demo.assignment.my_cart.ui.screens.listeners.CartUpdateListener;
 
+/**
+ * Adapter for displaying cart items
+ */
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHolder> {
 
     private final List<CartItem> listItems;
     private final Context context;
     private final CommonActivity commonActivity;
-    private final CartUpdateListener listener;
-    private double totalAmount;
+    private final CartUpdateListener listener; // to notify adapter item count update to parent fragment
+    private double totalAmount; // store calculated total amount of cart items
 
     public CartItemAdapter(Context context, List<CartItem> items, CartUpdateListener listener) {
         this.context = context;
@@ -62,6 +65,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         if (holder.getAdapterPosition() == 0) {
             totalAmount = 0;
         }
+        // subtotal of each cart item will be added to this each time this method gets invoked.
         totalAmount += subTotal;
 
         if (!isNullOrEmpty(cartItem.getImageUrl())) {
@@ -108,20 +112,25 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         });
     }
 
+    /**
+     * Remove a product from cart adapter
+     * @param position
+     * @param prodId
+     */
     private void removeItem(int position, int prodId) {
-        //update shared preference
+        //update cart items stored in shared preferences
         LinkedHashMap<Integer, CartItem> hashMap = commonActivity.getCartItems();
         hashMap.remove(prodId);
 
         commonActivity.updateCartItems(hashMap, new SharedPrefListener() {
             @Override
             public void onSuccess() {
+                // ui gets updated only after shared preferences has been updated successfully
                 listItems.remove(position);
                 if (getItemCount() == 0) {
                     // if all items are removed, notify cart fragment to show empty cart message
                     listener.onCartUpdated(false, "0");
                 }
-//                notifyItemRemoved(position);
 
                 // if the item list is not empty, it will update the recyclerview
                 notifyDataSetChanged();
@@ -134,8 +143,14 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         });
     }
 
+    /**
+     * Update quantity added to the cart of a specific product
+     * @param position
+     * @param prodId
+     * @param newQty
+     */
     private void updateQuantity(int position, int prodId, int newQty) {
-        // update shared preference
+        // update cart items stored in shared preferences
         LinkedHashMap<Integer, CartItem> hashMap = commonActivity.getCartItems();
         CartItem item = hashMap.get(prodId);
         if (item != null) {
@@ -144,8 +159,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         commonActivity.updateCartItems(hashMap, new SharedPrefListener() {
             @Override
             public void onSuccess() {
+                // ui gets updated only after shared preferences has been updated successfully
                 listItems.get(position).setQty(newQty);
-//                notifyItemChanged(position);
 
                 // update recyclerview to show modified data
                 notifyDataSetChanged();
@@ -164,7 +179,6 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView tvProductTitle, tvQuantity, tvSubTotal, btnAdd, btnDeduct;
         ImageView ivProductImage, btnRemove;
 

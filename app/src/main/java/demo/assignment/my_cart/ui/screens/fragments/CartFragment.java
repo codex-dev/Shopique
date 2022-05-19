@@ -25,6 +25,9 @@ import demo.assignment.my_cart.ui.screens.DeliveryLocationActivity;
 import demo.assignment.my_cart.ui.screens.HomeActivity;
 import demo.assignment.my_cart.ui.screens.listeners.CartUpdateListener;
 
+/**
+ * Fragment to display and manage cart items
+ */
 public class CartFragment extends Fragment {
 
     private HomeActivity homeActivity;

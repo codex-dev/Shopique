@@ -14,6 +14,9 @@ import demo.assignment.my_cart.ui.screens.dialog.AlertDialogListener;
 import demo.assignment.my_cart.ui.screens.dialog.CustomAlertDialog;
 import demo.assignment.my_cart.ui.screens.dialog.DialogType;
 
+/**
+ * Login activity to let user sign in to the app
+ */
 public class LoginActivity extends CommonActivity {
 
     private static final String TAG = "LoginActivity";
@@ -50,6 +53,10 @@ public class LoginActivity extends CommonActivity {
         });
     }
 
+    /**
+     * Validate user input and show errors as required before proceeding
+     * @return
+     */
     private boolean hasValidInput() {
         if (isNullOrEmpty(etUsername)) {
             etUsername.requestFocus();

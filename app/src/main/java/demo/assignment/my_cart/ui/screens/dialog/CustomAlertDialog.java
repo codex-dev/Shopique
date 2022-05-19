@@ -12,6 +12,9 @@ import androidx.fragment.app.DialogFragment;
 
 import demo.assignment.my_cart.R;
 
+/**
+ * Customized alert dialog to warn user before processing critical actions.
+ */
 public class CustomAlertDialog extends DialogFragment {
 
     private Context context;
@@ -53,7 +56,6 @@ public class CustomAlertDialog extends DialogFragment {
                 })
                 .setNegativeButton(negativeButtonText, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-//                        listener.onNegativeButtonClicked();
                         dismiss();
                     }
                 })

@@ -13,6 +13,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import demo.assignment.my_cart.R;
 import demo.assignment.my_cart.ui.screens.listeners.AppbarListener;
 
+/**
+ * Hosting activity of 3 fragments which display products, cart and orders list respectively.
+ */
 public class HomeActivity extends CommonActivity implements AppbarListener {
 
     private static final String TAG = "HomeActivity";
@@ -34,21 +37,6 @@ public class HomeActivity extends CommonActivity implements AppbarListener {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-        /*
-        int cartCount = getCartItems().size();
-        if (cartCount > 0) {
-            showCartBadge(true, cartCount);
-        } else {
-            showCartBadge(false, 0);
-        }*/
-    }
-
-    public void showCartBadge(boolean showBadge, int count) {
-        BadgeDrawable cartBadge = navView.getOrCreateBadge(R.id.navigation_cart);
-        cartBadge.setBadgeTextColor(getResources().getColor(R.color.white));
-        cartBadge.setNumber(count);
-        cartBadge.setVisible(showBadge);
     }
 
     @Override
